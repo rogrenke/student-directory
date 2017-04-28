@@ -21,6 +21,17 @@ def print(students)
     puts "#{idx+1}. #{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
+
+def print_by_letter(students)
+  puts "Please give the starting letter for the students"
+  input = gets.chomp
+  puts "Those are the students starting with '#{input}'"
+  students.each_with_index do |student, idx|
+    if input[0].downcase == student[:name][0].downcase
+      puts "#{idx+1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    end
+  end
+end
 # finally, printing total number of students
 def print_footer(students)
   puts "Overall, we have #{students.count} great students"
@@ -28,5 +39,5 @@ end
 
 students = input_students
 print_header
-print(students)
+print_by_letter(students)
 print_footer(students)
