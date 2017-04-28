@@ -17,8 +17,10 @@ def print_header
 end
 
 def print(students)
-  students.each_with_index do |student, idx|
-    puts "#{idx+1}. #{student[:name]} (#{student[:cohort]} cohort)"
+  idx = 0
+  while idx < students.length
+    puts "#{idx+1}. #{students[idx][:name]} (#{students[idx][:cohort]} cohort) "
+    idx += 1
   end
 end
 
@@ -48,5 +50,5 @@ end
 
 students = input_students
 print_header
-print_12_chars(students)
+print(students)
 print_footer(students)
