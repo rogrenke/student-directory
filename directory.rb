@@ -18,8 +18,13 @@ end
 
 def print(students)
   idx = 0
+  name_lengths = []
+  students.each do |student|
+    name_lengths << student[:name].length
+  end
   while idx < students.length
-    puts "#{idx+1}. #{students[idx][:name]} (#{students[idx][:cohort]} cohort, hobbies: #{students[idx][:hobbies]}, country of birth: #{students[idx][:country_of_birth]}, height: #{students[idx][:height]}) "
+    str = "#{idx+1}. #{students[idx][:name]} (#{students[idx][:cohort]} cohort, hobbies: #{students[idx][:hobbies]}, country of birth: #{students[idx][:country_of_birth]}, height: #{students[idx][:height]})"
+    puts str.center(str.length-students[idx][:name].length+name_lengths.max+20)
     idx += 1
   end
 end
