@@ -1,12 +1,35 @@
 def input_students
-  puts "Please enter the names of the students"
+  months = ["january","february","march","april","may","june","july","august","september","october","november","december","unknown"]
+  puts "Please enter the names of the students and their cohort month"
   puts "To finish, just hit return twice"
   students = []
+  puts "Name?"
   name = gets.chomp
-  while !name.empty? do
-    students << {name: name, cohort: :november, hobbies: "Being evil", country_of_birth: "World", height: "2.00m" }
+  puts "Cohort Month?"
+  cohort = gets.chomp
+  while true do
+    if name.empty? && cohort.empty?
+      return students
+    elsif cohort.empty?
+      cohort = :Unknown
+    elsif name.empty?
+      name = "Anonymous"
+    end
+    while !months.include?(cohort.to_s.downcase)
+      puts "That's not a valid month. Please re-enter the cohort month"
+      cohort = gets.chomp
+      if cohort.empty?
+        cohort = :Unknown
+      end
+    end
+    students << {name: name, cohort: cohort.to_sym, hobbies: "Being evil", country_of_birth: "World", height: "2.00m" }
     puts "Now we have #{students.count} students"
+    name = nil
+    cohort = nil
+    puts "Name?"
     name = gets.chomp
+    puts "Cohort?"
+    cohort = gets.chomp
   end
   students
 end
