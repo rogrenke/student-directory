@@ -1,5 +1,6 @@
-def input_students
-  months = ["january","february","march","april","may","june","july","august","september","october","november","december","unknown"]
+months = ["january","february","march","april","may","june","july","august","september","october","november","december","unknown"]
+
+def input_students(months)
   puts "Please enter the names of the students and their cohort month"
   puts "To finish, just hit return twice"
   students = []
@@ -52,6 +53,17 @@ def print(students)
   end
 end
 
+def print_by_cohort(students,months)
+  puts "(sorted by cohort)"
+  months.each do |month|
+    students.each_with_index do |student|
+      if month == student[:cohort].to_s.downcase
+        puts "#{student[:name]} (#{student[:cohort]} cohort, hobbies: #{student[:hobbies]}, country of birth: #{student[:country_of_birth]}, height: #{student[:height]})"
+      end
+    end
+  end
+end
+
 def print_by_letter(students)
   puts "Please give the starting letter for the students"
   input = gets.chomp
@@ -76,7 +88,7 @@ def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
 
-students = input_students
+students = input_students(months)
 print_header
-print(students)
+print_by_cohort(students,months)
 print_footer(students)
