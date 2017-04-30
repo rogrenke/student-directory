@@ -1,4 +1,28 @@
-months = ["january","february","march","april","may","june","july","august","september","october","november","december","unknown"]
+def interactive_menu
+  months = ["january","february","march","april","may","june","july","august","september","october","november","december","unknown"]
+  students = []
+  loop do
+    # 1. print the menu and ask user what to do
+    puts "1. Input the students"
+    puts "2. Show the students"
+    puts "9. Exit"
+    # 2. read the input and save it into a variable
+    selection = gets.chomp
+    # 3. Perform the task
+    case selection
+    when "1"
+      students = input_students(months)
+    when "2"
+      print_header
+      print(students)
+      print_footer(students)
+    when "9"
+      exit
+    else
+      puts "I don't know what you mean, try again (type a number between 1 and 9)."
+    end
+  end
+end
 
 def input_students(months)
   puts "Please enter the names of the students and their cohort month"
@@ -99,11 +123,4 @@ def print_footer(students)
   end
 end
 
-students = input_students(months)
-if students.count == 0
-  puts "We don't have any students at the moment."
-else
-  print_header
-  print_by_cohort(students,months)
-  print_footer(students)
-end
+interactive_menu
