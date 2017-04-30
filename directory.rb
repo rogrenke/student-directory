@@ -16,6 +16,7 @@ def input_students(months)
     elsif name.empty?
       name = "Anonymous"
     end
+
     while !months.include?(cohort.to_s.downcase)
       puts "That's not a valid month. Please re-enter the cohort month"
       cohort = gets.chomp
@@ -24,7 +25,13 @@ def input_students(months)
       end
     end
     students << {name: name, cohort: cohort.to_sym, hobbies: "Being evil", country_of_birth: "World", height: "2.00m" }
-    puts "Now we have #{students.count} students"
+
+    if students.count == 1
+      puts "We have 1 great student"
+    else
+      puts "Overall, we have #{students.count} great students"
+    end
+
     name = nil
     cohort = nil
     puts "Name?"
@@ -85,7 +92,11 @@ def print_12_chars(students)
 end
 # finally, printing total number of students
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+  if students.count == 1
+    puts "We have 1 great student"
+  else
+    puts "Overall, we have #{students.count} great students"
+  end
 end
 
 students = input_students(months)
