@@ -5,9 +5,9 @@ def input_students(months)
   puts "To finish, just hit return twice"
   students = []
   puts "Name?"
-  name = gets.chomp
+  name = gets.delete!("\n")
   puts "Cohort Month?"
-  cohort = gets.chomp
+  cohort = gets.delete!("\n")
   while true do
     if name.empty? && cohort.empty?
       return students
@@ -19,7 +19,7 @@ def input_students(months)
 
     while !months.include?(cohort.to_s.downcase)
       puts "That's not a valid month. Please re-enter the cohort month"
-      cohort = gets.chomp
+      cohort = gets.delete!("\n")
       if cohort.empty?
         cohort = :Unknown
       end
@@ -35,9 +35,9 @@ def input_students(months)
     name = nil
     cohort = nil
     puts "Name?"
-    name = gets.chomp
+    name = gets.delete!("\n")
     puts "Cohort?"
-    cohort = gets.chomp
+    cohort = gets.delete!("\n")
   end
   students
 end
@@ -73,7 +73,7 @@ end
 
 def print_by_letter(students)
   puts "Please give the starting letter for the students"
-  input = gets.chomp
+  input = gets.gets.delete!("\n")
   puts "Those are the students starting with '#{input}'"
   students.each_with_index do |student, idx|
     if input[0].downcase == student[:name][0].downcase
