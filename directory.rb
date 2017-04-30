@@ -100,6 +100,10 @@ def print_footer(students)
 end
 
 students = input_students(months)
-print_header
-print_by_cohort(students,months)
-print_footer(students)
+if students.count == 0
+  puts "We don't have any students at the moment."
+else
+  print_header
+  print_by_cohort(students,months)
+  print_footer(students)
+end
