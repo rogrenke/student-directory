@@ -15,8 +15,10 @@ def process(selection)
       show_students
     when "3"
       save_students
+      puts "Students' list saved!"
     when "4"
       load_students
+      puts "Students' list loaded!"
     when "9"
       exit
     else
@@ -76,8 +78,11 @@ def save_students
 end
 
 def try_load_students
-  filename = ARGV.first
-  return if filename.nil?
+  if ARGV.first.nil?
+    filename = "students.csv"
+  else
+    filename = ARGV.first
+  end
   if File.exists?(filename)
     load_students(filename)
     puts "Loaded #{@students.count} from #{filename}"
