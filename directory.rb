@@ -70,13 +70,13 @@ end
 def save_students
   puts "Please enter a filename with .csv ending"
   input = gets.chomp
-  file = File.open(input, "w")
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+  File.open(input, "w") do |file|
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    end
   end
-  file.close
 end
 
 def try_load_students
@@ -102,12 +102,12 @@ def filename_to_load
 end
 
 def load_students(filename)
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(",")
-    add_to_array(name,cohort)
+  File.open(filename, "r") do |file|
+    file.readlines.each do |line|
+      name, cohort = line.chomp.split(",")
+      add_to_array(name,cohort)
+    end
   end
-  file.close
 end
 
 def add_to_array(name,cohort)
