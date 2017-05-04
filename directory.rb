@@ -1,3 +1,4 @@
+require 'csv'
 @students = []
 
 def interactive_menu
@@ -41,7 +42,7 @@ def show_students
 end
 
 def input_students
-  puts "Please enter the names of the students and their cohort month"
+  puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
     name = STDIN.gets.chomp
   while !name.empty? do
@@ -70,11 +71,10 @@ end
 def save_students
   puts "Please enter a filename with .csv ending"
   input = gets.chomp
-  File.open(input, "w") do |file|
+  CSV.open(input, "w") do |file|
     @students.each do |student|
       student_data = [student[:name], student[:cohort]]
-      csv_line = student_data.join(",")
-      file.puts csv_line
+      file << student_data
     end
   end
 end
@@ -102,11 +102,9 @@ def filename_to_load
 end
 
 def load_students(filename)
-  File.open(filename, "r") do |file|
-    file.readlines.each do |line|
-      name, cohort = line.chomp.split(",")
-      add_to_array(name,cohort)
-    end
+  CSV.foreach(filename) do |line|
+    name, cohort = line
+    add_to_array(name,cohort)
   end
 end
 
